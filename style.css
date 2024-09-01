@@ -137,3 +137,104 @@
     cursor: pointer;
   }
   /* end of products section */
+  /* cart style section */
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 5;
+  }
+  .cart{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 10;
+    width: 30rem;
+    min-height: 200px;
+    border: 1px solid var(--mainGrey);
+    border-radius: 5px;
+    padding: 1rem;
+    top: 25%;
+    position: absolute;
+    left: 30%;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+    background-color: var(--mainWhite);
+  }
+  .cart-title{
+    text-align: center;
+    font-size: x-large;
+  }
+  .cart-content{
+  display: grid;
+  row-gap: 1rem;
+  column-gap: 0.5rem;
+  }
+  .cart-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .cart-item-img >img{
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+  }
+  .cart-item-detail{
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+    
+  }
+  .cart-item-ctrl{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2rem;
+  }
+  .cart .cart-item-ctrl >img{
+    cursor: pointer;
+    width: 15px;
+    height:15px;
+    background-color: var(--primaryColor);
+    border-radius: 15px;
+  }
+  .cart-item-quantity{
+    font-weight: 600;
+  }
+  .cart-item-remove >img{
+    width: 15px;
+    height: auto;
+    cursor: pointer;
+  }
+  .cart-footer .btn{
+    cursor: pointer;
+    padding: 0.7rem;
+    font-weight: 600;
+    border-radius: 15px;
+    border: none;
+    background-color: var(--primaryColor);
+    color: var(--mainWhite);
+  }
+  .cart-footer{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+   margin:  1rem;
+   margin-top: 2rem;
+  }
+  @media (max-width: 600px) {
+    .cart {
+      left: 5% !important;
+      max-width: 50rem;
+      width: calc(100vw - 2rem);
+      padding: 0;
+    }
+  }
+  /* end of cart style section */
