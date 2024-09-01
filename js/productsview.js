@@ -2,7 +2,7 @@ const productsCentre=document.querySelector(".products_centre");
 import Storage from "./storage.js";
 import cartview from "./cartview.js";
 let cart=[];
-let addToCartBtns=[];
+export let addToCartBtns=[];
 
 class ProductsView{
     displayProducts(products){
