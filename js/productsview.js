@@ -1,4 +1,7 @@
 const productsCentre=document.querySelector(".products_centre");
+import Storage from "./storage.js";
+let cart=[];
+
 class ProductsView{
     displayProducts(products){
         let result="";
@@ -16,6 +19,27 @@ class ProductsView{
         });
         productsCentre.innerHTML=result;
         }
+        getAddToCartBtns(){
+            const addBtns=document.querySelectorAll(".product_btn");
+            addBtns.forEach(btn=>{
+                const id=btn.dataset.id;
+                const isInCart=cart.find(cItem=>cItem.id==id);
+                if(isInCart){
+                    btn.innerText="In cart";
+                    btn.disabled=true;
+                }
+                else {
+                    btn.addEventListener("click",()=>{
+                    const product=Storage.findProduct(id);
+                    btn.innerText="In cart";
+                    btn.disabled=true;       
+                    const productToAdd={...product,quantity:1};
+                    cart=[...cart,productToAdd];
+                    Storage.saveCart(cart);
+                    });
+                }
+            });
+            }
 
 }
 export default new ProductsView();

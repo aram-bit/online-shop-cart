@@ -45,5 +45,12 @@ static getProducts(){
 static saveProducts(products){
     localStorage.setItem("products",JSON.stringify(products));
 }
+static findProduct(id){
+    const products=JSON.parse(localStorage.getItem("products"));
+    return products.find(p=>p.id==(id));
+}
+static saveCart(cart){
+    localStorage.setItem("cart",JSON.stringify(cart));
+}
 
 }
