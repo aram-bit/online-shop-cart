@@ -37,7 +37,8 @@ class ProductsView{
                     const productToAdd={...product,quantity:1};
                     cart=[...cart,productToAdd];
                     Storage.saveCart(cart);
-                    cartview.setCartValue(cart)
+                    cartview.setCartValue(cart);
+                    cartview.displayCart(cart);
                     });
                 }
             });
