@@ -5,11 +5,14 @@ const basket=document.querySelector(".cart-btn");
 const backDrop=document.querySelector(".backdrop");
 const cartPage=document.querySelector(".cart");
 const confirm=document.querySelector(".confirm-btn");
+const clearCart=document.querySelector(".clear-btn");
+import Storage from "./storage.js";
 class CartView{
     constructor(){
         basket.addEventListener("click",()=>this.showCart());
         backDrop.addEventListener("click",()=>this.closeCart());
         confirm.addEventListener("click",()=>this.closeCart());
+        clearCart.addEventListener("click",()=>this.clearCartFunc());
     }
     setCartValue(cart){
         let tempCartItems=0;
@@ -56,6 +59,15 @@ class CartView{
     closeCart(){
         backDrop.style.display="none";
         cartPage.style.opacity="0"
+    }
+    clearCartFunc(){
+        Storage.getCart().forEach(cartItem=>this.removeCartItem(cartItem.id));
+    }
+    removeCartItem(id){
+       const filteredCart=Storage.getCart().filter(item=>item.id!==id);
+       Storage.saveCart(filteredCart);
+       this.setCartValue(filteredCart);
+       this.displayCart(filteredCart);
     }
 
 }
