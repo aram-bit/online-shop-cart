@@ -1,5 +1,6 @@
 const productsCentre=document.querySelector(".products_centre");
 import Storage from "./storage.js";
+import cartview from "./cartview.js";
 let cart=[];
 
 class ProductsView{
@@ -36,6 +37,7 @@ class ProductsView{
                     const productToAdd={...product,quantity:1};
                     cart=[...cart,productToAdd];
                     Storage.saveCart(cart);
+                    cartview.setCartValue(cart)
                     });
                 }
             });
