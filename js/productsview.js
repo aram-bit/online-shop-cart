@@ -2,6 +2,7 @@ const productsCentre=document.querySelector(".products_centre");
 import Storage from "./storage.js";
 import cartview from "./cartview.js";
 let cart=[];
+let addToCartBtns=[];
 
 class ProductsView{
     displayProducts(products){
@@ -22,6 +23,7 @@ class ProductsView{
         }
         getAddToCartBtns(){
             const addBtns=document.querySelectorAll(".product_btn");
+            addToCartBtns=[...addBtns];
             addBtns.forEach(btn=>{
                 const id=btn.dataset.id;
                 const isInCart=cart.find(cItem=>cItem.id==id);
@@ -43,6 +45,17 @@ class ProductsView{
                 }
             });
             }
+            setUpApp(){
+                cart=(Storage.getCart()) || [];
+                cartview.displayCart(cart);
+                cartview.setCartValue(cart);
+                cart.forEach(item=>{
+                    const id=item.id;
+                   const btn= addToCartBtns.find(btn=>btn.dataset.id==id);
+                   btn.innerText="In cart";
+                   btn.disabled=true;
+                });
+                }
 
 }
 export default new ProductsView();
