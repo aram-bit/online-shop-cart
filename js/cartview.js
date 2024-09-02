@@ -16,6 +16,36 @@ class CartView{
         backDrop.addEventListener("click",()=>this.closeCart());
         confirm.addEventListener("click",()=>this.closeCart());
         clearCart.addEventListener("click",()=>this.clearCartFunc());
+        cartContent.addEventListener("click",(e)=>this.cartItemControl(e));
+    }
+    cartItemControl(e){
+      const id=e.target.dataset.id;
+      if (e.target.classList.contains("cart-item-remove")){
+        this.removeCartItem(id);
+      }
+      else if(e.target.classList.contains("cart-item-inc")){
+        let _cart=Storage.getCart();
+       const productToInc=_cart.find(c=>c.id==parseInt(id));
+      //  if(productToInc.quantity==parseInt(1)){
+      //   this.removeCartItem(id);
+      // }
+       productToInc.quantity++;
+       Storage.saveCart(_cart);
+       this.displayCart(_cart);
+       this.setCartValue(_cart);
+      }
+      else if(e.target.classList.contains("cart-item-dec")){
+        let _cart=Storage.getCart();
+        const productToDec=_cart.find(c=>c.id==parseInt(id));
+          productToDec.quantity--;
+          Storage.saveCart(_cart);
+          this.displayCart(_cart);
+          this.setCartValue(_cart);
+          if(productToDec.quantity==0){
+          this.removeCartItem(productToDec.id);
+          return;
+}
+      }
     }
     setCartValue(cart){
         let tempCartItems=0;
@@ -47,8 +77,8 @@ class CartView{
                   data-id=${cartItem.id}
                 />
               </span>
-              <span class="cart-item-remove" data-id=${cartItem.id}>
-                <img src="/images/trash-can.svg" alt="" />
+              <span >
+                <img src="/images/trash-can.svg" alt="" class="cart-item-remove" data-id=${cartItem.id} />
               </span>
             </div>`;
             
@@ -67,11 +97,12 @@ class CartView{
         cart.forEach(cartItem=>this.removeCartItem(cartItem.id));
     }
     removeCartItem(id){
-       const filteredCart=Storage.getCart().filter(item=>item.id!==id);
+       const filteredCart=Storage.getCart().filter(item=>item.id!==parseInt(id));
        Storage.saveCart(filteredCart);
        this.setCartValue(filteredCart);
        this.displayCart(filteredCart);
        productsview.setUpApp();
+       this.closeCart();
        const button=addToCartBtns.find(btn=>btn.dataset.id==parseInt(id));
        button.innerText="add to cart";
        button.disabled=false;
