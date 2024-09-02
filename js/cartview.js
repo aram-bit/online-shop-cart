@@ -8,6 +8,8 @@ const confirm=document.querySelector(".confirm-btn");
 const clearCart=document.querySelector(".clear-btn");
 import Storage from "./storage.js";
 import { addToCartBtns } from "./productsview.js";
+import productsview from "./productsview.js";
+import { cart } from "./productsview.js";
 class CartView{
     constructor(){
         basket.addEventListener("click",()=>this.showCart());
@@ -62,13 +64,14 @@ class CartView{
         cartPage.style.opacity="0"
     }
     clearCartFunc(){
-        Storage.getCart().forEach(cartItem=>this.removeCartItem(cartItem.id));
+        cart.forEach(cartItem=>this.removeCartItem(cartItem.id));
     }
     removeCartItem(id){
        const filteredCart=Storage.getCart().filter(item=>item.id!==id);
        Storage.saveCart(filteredCart);
        this.setCartValue(filteredCart);
        this.displayCart(filteredCart);
+       productsview.setUpApp();
        const button=addToCartBtns.find(btn=>btn.dataset.id==parseInt(id));
        button.innerText="add to cart";
        button.disabled=false;
