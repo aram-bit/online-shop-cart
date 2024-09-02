@@ -1,9 +1,8 @@
 const productsCentre=document.querySelector(".products_centre");
 import Storage from "./storage.js";
 import cartview from "./cartview.js";
-let cart=[];
+ export let cart=[];
 export let addToCartBtns=[];
-
 class ProductsView{
     displayProducts(products){
         let result="";
@@ -21,7 +20,7 @@ class ProductsView{
         });
         productsCentre.innerHTML=result;
         }
-        getAddToCartBtns(){
+        getAddToCartBtns(){ 
             const addBtns=document.querySelectorAll(".product_btn");
             addToCartBtns=[...addBtns];
             addBtns.forEach(btn=>{
