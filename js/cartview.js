@@ -102,7 +102,10 @@ class CartView{
        this.setCartValue(filteredCart);
        this.displayCart(filteredCart);
        productsview.setUpApp();
+<<<<<<< HEAD
        this.closeCart();
+=======
+>>>>>>> 505ac8f16ae5f49ebf3d448ba7f219b825174d52
        const button=addToCartBtns.find(btn=>btn.dataset.id==parseInt(id));
        button.innerText="add to cart";
        button.disabled=false;
